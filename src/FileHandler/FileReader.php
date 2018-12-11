@@ -2,9 +2,9 @@
 
 namespace a2la1101\csvhandler\FileHandler;
 
-use a2la1101\csvhandler\Contracts\ReadOnlyFileHandler;
+use a2la1101\csvhandler\contracts\ReadOnlyFileHandler;
 use a2la1101\csvhandler\Traits\FileConnections;
-use a2la1101\csvhandler\Contracts\GeneralFileHandler;
+use a2la1101\csvhandler\contracts\GeneralFileHandler;
 
 use a2la1101\csvhandler\Exceptions\PermissionDeniedException;
 use a2la1101\csvhandler\Exceptions\FileException;
@@ -155,6 +155,11 @@ class FileReader implements ReadOnlyFileHandler,GeneralFileHandler {
 		
 			$keys=$this->getKeys();
 		
+		}
+
+		if(substr($Line,-1)==='\n')
+		{
+			$Line=substr($Line, 0, -1);
 		}
 		
 		$RawData=$this->getDataInLine($Line);

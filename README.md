@@ -28,6 +28,8 @@ $app->configure('CSVHandler');
 everything is now set and ready to be used.
 
 ## how to use :
+before starting, go to a2la1101\csvhandler\config, and read how to configure csvHandler Example.
+
 1) to Read :
 ```
 $fileHandler=app("CSVHandlerService")->createFileHandler("READTEST");
@@ -38,5 +40,31 @@ print_r($fileHandler->readAll());
 
 ```
 
-## TODO
-Making write to file functionality
+2) to write :
+
+to call handler for writing
+```
+$fileHandler=app("CSVHandlerService")->createFileHandler("WRITETEST");
+```
+suppose you have a $DataArray
+```
+[
+	["x"=>"a1","y"=>"b1","z"=>1],
+	["x"=>"a2","y"=>"b2","z"=>2],
+	["x"=>"a3","y"=>"b3","z"=>3],
+	["x"=>"a4","y"=>"b4","z"=>4],
+]
+```
+To Write By Line
+```
+$fileHandler->writeByLine($DataArray[0]) ;
+.
+.
+.
+// if you have finished writing and want to close file
+$fileHandler->writeByLine(null);
+```
+To Write All
+```
+print_r($fileHandler->writeAll($DataArray));
+```

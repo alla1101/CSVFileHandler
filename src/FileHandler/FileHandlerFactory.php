@@ -3,8 +3,10 @@
 namespace a2la1101\csvhandler\FileHandler;
 
 use a2la1101\csvhandler\FileHandler\FileReader;
+use a2la1101\csvhandler\FileHandler\FileWriter;
 
 use a2la1101\csvhandler\contracts\ReadOnlyFileHandler;
+use a2la1101\csvhandler\contracts\WriteOnlyFileHandler;
 use a2la1101\csvhandler\contracts\PermissionDeniedException;
 use a2la1101\csvhandler\contracts\FileConfigurationProvider;
 class FileHandlerFactory{
@@ -39,7 +41,7 @@ class FileHandlerFactory{
 				$fileObject=new FileReader();
 				break;
 			case 'w':
-				// @todo  $fileObject=new FileWriter();
+				$fileObject=new FileWriter();
 				break;
 		}
 
@@ -53,11 +55,17 @@ class FileHandlerFactory{
 				$newObject=$this->convertInterfacetoReadOnly($fileObject);
 				break;
 			case 'w':
-				// @todo
+				$newObject=$this->convertInterfacetoWriteOnly($fileObject);
 				break;
 		}
 
 		return $newObject;
+	}
+
+	private function convertInterfacetoWriteOnly(WriteOnlyFileHandler $FileObject){
+
+		return $FileObject;
+
 	}
 
 	private function convertInterfacetoReadOnly(ReadOnlyFileHandler $FileObject){

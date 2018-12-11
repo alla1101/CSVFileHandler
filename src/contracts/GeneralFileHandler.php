@@ -1,6 +1,6 @@
 <?php
 
-namespace a2la1101\csvhandler\Contracts;
+namespace a2la1101\csvhandler\contracts;
 
 interface GeneralFileHandler{
 
