@@ -10,5 +10,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "illuminate/filesystem": "^5.*",
+        "illuminate/translation": "^5.*",
+        "illuminate/validation": "^5.*"
+    }
 }
