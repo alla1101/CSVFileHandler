@@ -6,14 +6,13 @@ This package is made to ease file handling with configuration and config validat
 
 To validate each line in the file when writing.
 To validate each line before writing.
-To use illuminate library (validation) without laravel !
 
 ## Goals
 To work easily with laravel framework
 To work with other frameworks with relative ease.
 
 ## current limitations
-Main limit is the need for laravel framework to use the package
+No more limitations baby woow
 
 ## Getting Started
 
