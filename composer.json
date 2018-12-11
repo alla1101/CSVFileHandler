@@ -1,0 +1,14 @@
+{
+    "name": "a2la1101/csvhandler",
+    "description": "read from and write to a csv file",
+    "type": "library",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "Alla N. Barakat",
+            "email": "a2la1101@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
