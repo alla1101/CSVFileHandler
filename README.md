@@ -7,7 +7,6 @@ This package is made to ease file handling with configuration and config validat
 To validate each line in the file when writing.
 To validate each line before writing.
 To use illuminate library (validation) without laravel !
-To loade configurations without config function in laravel
 
 ## Goals
 To work easily with laravel framework
@@ -29,6 +28,27 @@ everything is now set and ready to be used.
 
 ## how to use :
 before starting, go to a2la1101\csvhandler\config, and read how to configure csvHandler Example.
+0)
+
+if you're not using lumen or laravel
+
+```
+$configProvider=new ConfigurationProvider();
+
+$configProvider->setConfigurationsDirectory($ConfigFiledirectory);
+
+$factory=new FileHandlerFactory();
+
+$factory->setConfigurationProvider($configProvider);
+
+$fileHandler=$factory->createFileHandler("CommandNameHere");
+```
+if you're using Laravel or Lumen
+```
+$fileHandler=app("CSVHandlerService")->createFileHandler("READTEST");
+
+```
+.................
 
 1) to Read :
 ```

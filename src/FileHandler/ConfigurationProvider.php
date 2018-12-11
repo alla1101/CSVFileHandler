@@ -5,9 +5,13 @@ namespace a2la1101\csvhandler\FileHandler;
 use a2la1101\csvhandler\contracts\FileConfigurationProvider;
 
 use Illuminate\Validation\Validator;
+use Illuminate\Container\Container;
+
 use a2la1101\csvhandler\Exceptions\ConfigurationsException;
 
 class ConfigurationProvider implements FileConfigurationProvider{
+
+	protected $configurationsDirectory=null;
 
 	protected $validationRules=
 	[
@@ -17,11 +21,32 @@ class ConfigurationProvider implements FileConfigurationProvider{
 		"Permission"=>"required|regex:/^[(r)(w)]$/"
 	];
 
+	public function setConfigurationsDirectory($directory){
+		
+		$this->configurationsDirectory=$directory;
+	
+	}
+
 	private function loadConfigurations(string $commandName){
 
-		$configuration="CSVHandler.".$commandName;
+		if(is_null($this->configurationsDirectory))
+		{
+			$configuration="CSVHandler.".$commandName;
+			$configArray=app("config")->get($configuration);
+		}
+		else
+		{
+			$configs=include($this->configurationsDirectory);
 
-		$configArray=config($configuration);
+			$configArray=null;
+
+			if(isset( $configs[$commandName] ) )
+			{
+				$configArray=$configs[$commandName];
+			}
+		}
+		
+		//$configArray=Container::getInstance()->make("config")->get($configuration);
 	
 		return $configArray;
 
