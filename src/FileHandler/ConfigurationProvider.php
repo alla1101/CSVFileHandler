@@ -4,7 +4,7 @@ namespace a2la1101\csvhandler\FileHandler;
 
 use a2la1101\csvhandler\contracts\FileConfigurationProvider;
 
-use Illuminate\Validation\Factory;
+use Illuminate\Validation\Validator;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
@@ -23,25 +23,16 @@ class ConfigurationProvider implements FileConfigurationProvider{
 		"Permission"=>"required|regex:/^[(r)(w)]$/"
 	];
 
-	protected function getValidator(){
+	protected function getTranslator(){
 		
-		// Create a Filesystem instance
 		$filesystem = new Filesystem();
 
-		// Create a new FileLoader instance specifying the translation path
-		$loader = new FileLoader($filesystem, dirname(dirname(__FILE__)) . '/lang');
+		$dir=__DIR__.'/../resources/lang';
+		$loader = new FileLoader($filesystem,$dir);
 
-		// Specify the translation namespace
-		$loader->addNamespace('lang', dirname(dirname(__FILE__)) . '/lang');
+		$translator = new Translator($loader, 'en');
 
-		// This is used to create the path to your validation.php file
-		$loader->load($lang = 'en', $group = 'validation', $namespace = 'lang');
-
-		$factory = new Translator($loader, 'en');
-
-		$validator=new Factory($factory);
-
-		return $validator;
+		return $translator;
 	
 	}
 
@@ -70,8 +61,6 @@ class ConfigurationProvider implements FileConfigurationProvider{
 			}
 		}
 		
-		//$configArray=Container::getInstance()->make("config")->get($configuration);
-	
 		return $configArray;
 
 	}
@@ -84,14 +73,12 @@ class ConfigurationProvider implements FileConfigurationProvider{
 		
 		}
 
-		$validator=$this->getValidator();//app("validator");
+		$validationProcess=new Validator($this->getTranslator(),$configArray,$this->validationRules);//app("validator");
 		
 		// Validation for the configurations are made here
 		
-		$validationProcess=$validator->make($configArray,$this->validationRules);
-
 		if( $validationProcess->fails() ){
-			print_r($x->errors());
+			print_r($validationProcess->errors());
 		}
 
 		$validationProcess->validate();

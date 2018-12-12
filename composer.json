@@ -15,6 +15,7 @@
         "illuminate/contracts": "5.7.*",
         "illuminate/filesystem": "5.7.*",
         "illuminate/translation": "5.7.*",
-        "illuminate/validation": "5.7.*"
+        "illuminate/validation": "5.7.*",
+        "Illuminate/Support": "5.7.*",
     }
 }
