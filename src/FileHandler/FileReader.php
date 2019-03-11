@@ -157,7 +157,7 @@ class FileReader implements ReadOnlyFileHandler,GeneralFileHandler {
 		
 		}
 
-		if(substr($Line,-1)==='\n')
+		if(strcmp(substr($Line,-1),"\n")==0)
 		{
 			$Line=substr($Line, 0, -1);
 		}

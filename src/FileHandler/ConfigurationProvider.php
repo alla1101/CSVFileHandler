@@ -36,7 +36,7 @@ class ConfigurationProvider implements FileConfigurationProvider{
 	
 	}
 
-	public function setConfigurationsDirectory($directory){
+	public function setConfigurationsDirectory($directory=null){
 		
 		$this->configurationsDirectory=$directory;
 	

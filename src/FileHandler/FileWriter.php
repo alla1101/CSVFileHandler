@@ -120,7 +120,7 @@ class FileWriter implements WriteOnlyFileHandler,GeneralFileHandler {
 		$keys=$this->getKeys();
 		
 		foreach ($AllLinesData as $OneLineData) {
-			
+
 			$this->writeline($OneLineData,$keys);
 		
 		}
@@ -174,7 +174,7 @@ class FileWriter implements WriteOnlyFileHandler,GeneralFileHandler {
 		
 		}
 
-		$line=substr($line, 0, -1);
+		$line=substr($line, 0, -1)."\n";
 
 		return $line;
 	}
